@@ -1,0 +1,7 @@
+package ut.edu.projectdemo.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import ut.edu.projectdemo.entity.Payment;
+
+public interface PaymentRepository extends JpaRepository<Payment, Long> {
+}
