@@ -18,7 +18,7 @@ import ut.edu.childvaccinescheduletrackingsystem.dtos.AuthResponse;
 import ut.edu.childvaccinescheduletrackingsystem.dtos.LoginRequest;
 import ut.edu.childvaccinescheduletrackingsystem.dtos.RegisterDTO;
 import ut.edu.childvaccinescheduletrackingsystem.jwt.JwtUtil;
-import ut.edu.childvaccinescheduletrackingsystem.services.UserService;
+import ut.edu.childvaccinescheduletrackingsystem.sevices.UserService;
 
 @RestController
 @RequestMapping("/auths")

@@ -19,4 +19,5 @@ public class RegisterDTO {
     public String getRole() {
         return role;
     }
+
 }
