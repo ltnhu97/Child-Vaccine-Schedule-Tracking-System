@@ -1,0 +1,4 @@
+package ut.edu.projectdemo.service;
+
+public class VaccineService {
+}
