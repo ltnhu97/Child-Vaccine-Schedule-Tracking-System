@@ -1,0 +1,66 @@
+document.getElementById('add-child-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    if (this.checkValidity()) {
+      const data = {
+        name: this.querySelector('#child-name').value,
+        birthdate: this.querySelector('#child-birthdate').value,
+        gender: this.querySelector('#child-gender').value,
+        parentId: 1 // Giả định parentId
+      };
+      fetch('http://localhost:8080/api/children', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+        .then(response => response.json())
+        .then(data => {
+          alert('Hồ sơ trẻ đã được thêm!');
+          this.reset();
+        })
+        .catch(error => alert('Lỗi: ' + error));
+    } else {
+      alert('Vui lòng điền đầy đủ thông tin.');
+    }
+  });
+  
+  document.getElementById('edit-child-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    if (this.checkValidity()) {
+      const data = {
+        name: this.querySelector('#edit-child-name').value,
+        birthdate: this.querySelector('#edit-child-birthdate').value,
+        gender: this.querySelector('#child-gender') ? this.querySelector('#child-gender').value : 'male' // Giả định nếu không có
+      };
+      const childId = this.querySelector('#child-id').value;
+      fetch(`http://localhost:8080/api/children/${childId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+        .then(response => response.json())
+        .then(data => {
+          alert('Hồ sơ trẻ đã được cập nhật!');
+          this.reset();
+        })
+        .catch(error => alert('Lỗi: ' + error));
+    } else {
+      alert('Vui lòng điền đầy đủ thông tin.');
+    }
+  });
+  
+  document.getElementById('delete-submit').addEventListener('click', function() {
+    const childId = document.getElementById('child-id').value;
+    if (confirm('Bạn có chắc chắn muốn xóa hồ sơ này?') && childId) {
+      fetch(`http://localhost:8080/api/children/${childId}`, {
+        method: 'DELETE'
+      })
+        .then(response => {
+          if (response.ok) {
+            alert('Hồ sơ trẻ đã được xóa!');
+          } else {
+            throw new Error('Xóa thất bại');
+          }
+        })
+        .catch(error => alert('Lỗi: ' + error));
+    }
+  });
